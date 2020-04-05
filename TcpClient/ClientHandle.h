@@ -16,6 +16,7 @@ class ClientHandle : public QWidget
 public:
   explicit ClientHandle(QWidget *parent = 0);
   ~ClientHandle();
+  void UiDesign();
 private slots:
   void onReadyReadSlot();
   void onBtnRegistClicked();

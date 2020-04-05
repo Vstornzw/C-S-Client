@@ -17,10 +17,34 @@ ClientHandle::ClientHandle(QWidget *parent) :
     connect(this->tcp_socket,SIGNAL(readyRead()),this,SLOT(onReadyReadSlot()));
 
     connect(ui_->btnRegist,SIGNAL(clicked(bool)),this,SLOT(onBtnRegistClicked()));
-
+    this->UiDesign();
 
 }
 
+//===主界面设置背景颜色
+void ClientHandle::UiDesign()
+{
+    this->setWindowTitle("TCP客户端");
+    this->setStyleSheet("color: black;");
+    ui_->btnRegist->setStyleSheet("QPushButton{"
+                                 "background-color:green;"   //背景颜色蓝色
+                                 "color: black;"
+                                 "border-radius: 10px;"     //圆角
+                                 "border: 2px groove gray;"
+                                 "border-style: outset;}"
+                                 "QPushButton:pressed{background-color:rgb(85, 170, 255);"
+                                 "border-style: inset; ""}");
+    ui_->btnRegist->setFlat (true);
+    ui_->btnLogin->setStyleSheet("QPushButton{"
+                                 "background-color:green;"   //背景颜色绿色
+                                 "color: black;"
+                                 "border-radius: 10px;"     //圆角
+                                 "border: 2px groove gray;"
+                                 "border-style: outset;}"
+                                 "QPushButton:pressed{background-color:rgb(85, 170, 255);"
+                                 "border-style: inset; ""}");
+    ui_->btnLogin->setFlat (true);
+}
 
 void ClientHandle::onReadyReadSlot() {
 
