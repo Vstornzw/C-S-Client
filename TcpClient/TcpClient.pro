@@ -27,6 +27,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         ClientHandle.cpp
 
-HEADERS  += ClientHandle.h
+HEADERS  += ClientHandle.h \
+    protocol.h
 
 FORMS    += ClientHandle.ui

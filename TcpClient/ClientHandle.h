@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QTcpSocket>
+#include <protocol.h>
 
 namespace Ui {
 class ClientHandle;
@@ -10,15 +11,18 @@ class ClientHandle;
 
 class ClientHandle : public QWidget
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit ClientHandle(QWidget *parent = 0);
-    ~ClientHandle();
+  explicit ClientHandle(QWidget *parent = 0);
+  ~ClientHandle();
+private slots:
+  void onReadyReadSlot();
+  void onBtnRegistClicked();
 
 private:
-    Ui::ClientHandle *ui_;
-    QTcpSocket *tcp_socket;
+  Ui::ClientHandle *ui_;
+  QTcpSocket *tcp_socket;
 };
 
 #endif // CLIENTHANDLE
