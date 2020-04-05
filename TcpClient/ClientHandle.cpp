@@ -7,20 +7,47 @@
 
 ClientHandle::ClientHandle(QWidget *parent) :
     QWidget(parent),
-    ui_(new Ui::ClientHandle)
-{
-    ui_->setupUi(this);
+    ui_(new Ui::ClientHandle) {
 
-    tcp_socket = new QTcpSocket(this);
-    tcp_socket->connectToHost(QHostAddress::LocalHost,8888);
+  ui_->setupUi(this);
 
-    connect(this->tcp_socket,SIGNAL(readyRead()),this,SLOT(onReadyReadSlot()));
+  tcp_socket = new QTcpSocket(this);
+  tcp_socket->connectToHost(QHostAddress::LocalHost,8888);
 
-    connect(ui_->btnRegist,SIGNAL(clicked(bool)),this,SLOT(onBtnRegistClicked()));
+  //设置登录页面的背景颜色
+  this->UiDesign();
+
+  connect(this->tcp_socket,SIGNAL(readyRead()),this,SLOT(onReadyReadSlot()));
+
+  connect(ui_->btnRegist,SIGNAL(clicked(bool)),this,SLOT(onBtnRegistClicked()));
 
 
 }
 
+void ClientHandle::UiDesign() {
+
+  this->setWindowTitle("Tcp客户端");
+  this->setStyleSheet("color: black;");
+  ui_->btnRegist->setStyleSheet("QPushButton{"
+                                "background-color:green;"   //背景颜色蓝色
+                                "color:black;"
+                                "border-radius: 10px;"      //圆角(分号忘记加了也会出错)
+                                "border :2px groove gray;"
+                                "border-style: outset;}"
+                                "QPushButton:pressed{background-color:rgb(85,170,255);"
+                                "border-style: inset; ""}");
+  //在qt中，想要去掉按钮的边框，让pushbutton按钮跟背景色融为一体，可以用函数QPushbutton::setFlat(true)来实现
+  ui_->btnRegist->setFlat(true);
+  ui_->btnLogin->setStyleSheet("QPushButton{"
+                               "background-color:green;"   //背景颜色绿色
+                               "color: black;"
+                               "border-radius: 10px;"     //圆角
+                               "border: 2px groove gray;"
+                               "border-style: outset;}"
+                               "QPushButton:pressed{background-color:rgb(85, 170, 255);"
+                               "border-style: inset; ""}");
+  ui_->btnLogin->setFlat (true);
+}
 
 void ClientHandle::onReadyReadSlot() {
 
