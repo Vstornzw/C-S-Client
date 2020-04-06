@@ -905,7 +905,59 @@ debug/RoomListUi.o: RoomListUi.cpp RoomListUi.h \
 		../../../../QQT/5.8/mingw53_32/include/QtCore/qjsonvalue.h \
 		../../../../QQT/5.8/mingw53_32/include/QtCore/QJsonDocument \
 		../../../../QQT/5.8/mingw53_32/include/QtCore/qjsondocument.h \
-		ui_RoomListUi.h
+		ui_RoomListUi.h \
+		../../../../QQT/5.8/mingw53_32/include/QtCore/QVariant \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QAction \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qaction.h \
+		../../../../QQT/5.8/mingw53_32/include/QtGui/qicon.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qactiongroup.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QApplication \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qapplication.h \
+		../../../../QQT/5.8/mingw53_32/include/QtCore/qcoreapplication.h \
+		../../../../QQT/5.8/mingw53_32/include/QtCore/qeventloop.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qdesktopwidget.h \
+		../../../../QQT/5.8/mingw53_32/include/QtGui/qguiapplication.h \
+		../../../../QQT/5.8/mingw53_32/include/QtGui/qinputmethod.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QButtonGroup \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qbuttongroup.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QGridLayout \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qgridlayout.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qlayout.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qlayoutitem.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qboxlayout.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QHeaderView \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qheaderview.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qabstractitemview.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qframe.h \
+		../../../../QQT/5.8/mingw53_32/include/QtCore/qabstractitemmodel.h \
+		../../../../QQT/5.8/mingw53_32/include/QtCore/qitemselectionmodel.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qstyleoption.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qabstractspinbox.h \
+		../../../../QQT/5.8/mingw53_32/include/QtGui/qvalidator.h \
+		../../../../QQT/5.8/mingw53_32/include/QtCore/qregularexpression.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qslider.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qabstractslider.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qstyle.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qtabbar.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qtabwidget.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qrubberband.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QLabel \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qlabel.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QLineEdit \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qlineedit.h \
+		../../../../QQT/5.8/mingw53_32/include/QtGui/qtextcursor.h \
+		../../../../QQT/5.8/mingw53_32/include/QtGui/qtextformat.h \
+		../../../../QQT/5.8/mingw53_32/include/QtGui/qpen.h \
+		../../../../QQT/5.8/mingw53_32/include/QtGui/qtextoption.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QListWidget \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qlistwidget.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qlistview.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QPushButton \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qpushbutton.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qabstractbutton.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QSpacerItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\RoomListUi.o RoomListUi.cpp
 
 debug/WindowManage.o: WindowManage.cpp WindowManage.h \
@@ -1129,7 +1181,43 @@ debug/HostRoomUi.o: HostRoomUi.cpp HostRoomUi.h \
 		../../../../QQT/5.8/mingw53_32/include/QtGui/qtouchdevice.h \
 		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qtabwidget.h \
 		../../../../QQT/5.8/mingw53_32/include/QtGui/qicon.h \
-		ui_HostRoomUi.h
+		ui_HostRoomUi.h \
+		../../../../QQT/5.8/mingw53_32/include/QtCore/QVariant \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QAction \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qaction.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qactiongroup.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QApplication \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qapplication.h \
+		../../../../QQT/5.8/mingw53_32/include/QtCore/qcoreapplication.h \
+		../../../../QQT/5.8/mingw53_32/include/QtCore/qeventloop.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qdesktopwidget.h \
+		../../../../QQT/5.8/mingw53_32/include/QtGui/qguiapplication.h \
+		../../../../QQT/5.8/mingw53_32/include/QtGui/qinputmethod.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QButtonGroup \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qbuttongroup.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QHeaderView \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qheaderview.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qabstractitemview.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qabstractscrollarea.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qframe.h \
+		../../../../QQT/5.8/mingw53_32/include/QtCore/qabstractitemmodel.h \
+		../../../../QQT/5.8/mingw53_32/include/QtCore/qitemselectionmodel.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qstyleoption.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qabstractspinbox.h \
+		../../../../QQT/5.8/mingw53_32/include/QtGui/qvalidator.h \
+		../../../../QQT/5.8/mingw53_32/include/QtCore/qregularexpression.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qslider.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qabstractslider.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qstyle.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qtabbar.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qrubberband.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QMenuBar \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qmenubar.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qmenu.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QStatusBar \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/qstatusbar.h \
+		../../../../QQT/5.8/mingw53_32/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\HostRoomUi.o HostRoomUi.cpp
 
 debug/moc_ClientHandle.o: debug/moc_ClientHandle.cpp 

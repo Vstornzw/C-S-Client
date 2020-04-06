@@ -17,6 +17,9 @@ ClientHandle::ClientHandle(QWidget *parent) :
   tcp_socket = new QTcpSocket(this);
   tcp_socket->connectToHost(QHostAddress::LocalHost,8888);
 
+  //安装一个监听，为了Enter
+  ui_->linePwd->installEventFilter(this);
+
   connect(this->tcp_socket,SIGNAL(readyRead()),this,SLOT(onReadyReadSlot()));
 
   connect(ui_->btnRegist,SIGNAL(clicked(bool)),this,SLOT(onBtnRegistClicked()));
@@ -49,6 +52,33 @@ void ClientHandle::UiDesign()
                                  "QPushButton:pressed{background-color:rgb(85, 170, 255);"
                                  "border-style: inset; ""}");
     ui_->btnLogin->setFlat (true);
+}
+
+//===函数功能：按enter发送信息;返回值：bool===//
+
+bool ClientHandle::eventFilter(QObject *obj, QEvent *event) {
+
+  if(obj == ui_->linePwd) {
+    //是否是键盘事件
+    //QEvent::type()可以返回用于处理键盘按键的QEvent::KeyPress
+    if(event->type() == QEvent::KeyPress) {
+
+      //将QEvent类型转化为QKeyEvent
+      QKeyEvent *key_event = dynamic_cast<QKeyEvent*>(event);
+      //判定是否是键盘上的enter
+      //Qt::Key_Return字母键盘回车键
+      //Qt::Key_Entersjs数字小键盘回车键
+      if(key_event->key() == Qt::Key_Return || key_event->key() ==  Qt::Key_Enter) {
+        ClientHandle::onBtnLoginClicked();              //执行发送按钮的事件
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  } else {
+    return ClientHandle::eventFilter(obj,event);
+  }
 }
 
 //=====客户端从Tcp协议中读取到的数据，包含返回包并解析=====//

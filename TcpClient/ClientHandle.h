@@ -6,6 +6,8 @@
 #include <protocol.h>
 #include <WindowManage.h>
 
+#include<QKeyEvent>
+#include<QEvent>
 namespace Ui {
 class ClientHandle;
 }
@@ -18,10 +20,16 @@ public:
   explicit ClientHandle(QWidget *parent = 0);
   ~ClientHandle();
   void UiDesign();
+
+
+protected:
+  virtual bool eventFilter(QObject *obj, QEvent *event);
+
 private slots:
   void onReadyReadSlot();
   void onBtnRegistClicked();
   void onBtnLoginClicked();
+
 
 private:
   Ui::ClientHandle *ui_;
