@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QTcpSocket>
 #include <protocol.h>
+#include <WindowManage.h>
 
 namespace Ui {
 class ClientHandle;
@@ -20,6 +21,7 @@ public:
 private slots:
   void onReadyReadSlot();
   void onBtnRegistClicked();
+  void onBtnLoginClicked();
 
 private:
   Ui::ClientHandle *ui_;

@@ -7,17 +7,22 @@
 
 ClientHandle::ClientHandle(QWidget *parent) :
     QWidget(parent),
-    ui_(new Ui::ClientHandle)
-{
-    ui_->setupUi(this);
+    ui_(new Ui::ClientHandle) {
 
-    tcp_socket = new QTcpSocket(this);
-    tcp_socket->connectToHost(QHostAddress::LocalHost,8888);
+  ui_->setupUi(this);
+  //===RoomListUi和HostRoomUi函数在单例中完成===//
+  RoomListUi* room_ui_ = WindowManage::GetInstance()->GetRoomListUi();
+  HostRoomUi* host_ui_ = WindowManage::GetInstance()->GetHostListUi();
 
-    connect(this->tcp_socket,SIGNAL(readyRead()),this,SLOT(onReadyReadSlot()));
+  tcp_socket = new QTcpSocket(this);
+  tcp_socket->connectToHost(QHostAddress::LocalHost,8888);
 
-    connect(ui_->btnRegist,SIGNAL(clicked(bool)),this,SLOT(onBtnRegistClicked()));
-    this->UiDesign();
+  connect(this->tcp_socket,SIGNAL(readyRead()),this,SLOT(onReadyReadSlot()));
+
+  connect(ui_->btnRegist,SIGNAL(clicked(bool)),this,SLOT(onBtnRegistClicked()));
+  connect(ui_->btnLogin,SIGNAL(clicked(bool)),this,SLOT(onBtnLoginClicked()));
+
+  this->UiDesign();
 
 }
 
@@ -46,9 +51,12 @@ void ClientHandle::UiDesign()
     ui_->btnLogin->setFlat (true);
 }
 
+//=====客户端从Tcp协议中读取到的数据，包含返回包并解析=====//
 void ClientHandle::onReadyReadSlot() {
 
     Protocol p;
+    RoomListUi* room_ui_ = WindowManage::GetInstance()->GetRoomListUi();
+    HostRoomUi* host_ui_ = WindowManage::GetInstance()->GetHostListUi();
 
     QByteArray byte = this->tcp_socket->readAll();
     int len = 0;
@@ -66,7 +74,18 @@ void ClientHandle::onReadyReadSlot() {
             QMessageBox::information(this,"注册","未知错误");
           }
         break;
+      case Protocol::Login:
+        if(p["result"].toString() == "LoginTrue") {
+          this->close();
+          room_ui_->LeRoomList(p);
+          room_ui_->show();
 
+        } else if(p["result"].toString() == "LoginFalse") {
+          QMessageBox::critical(this,"登录","登录失败");
+        } else {
+          QMessageBox::critical(this,"登录","未知错误");
+        }
+        break;
 
 
       default:
@@ -97,4 +116,17 @@ void ClientHandle::onBtnRegistClicked() {
 
     //发送到服务器
     this->tcp_socket->write(p.pack());
+}
+
+//============登录槽函数============//
+void ClientHandle::onBtnLoginClicked() {
+
+  QString name = ui_->lineName->text();
+  QString pswd = ui_->linePwd->text();
+
+  Protocol p(Protocol::Login);
+  p["user_name"] = name;
+  p["user_pwd"] = pswd;
+
+  this->tcp_socket->write(p.pack());
 }

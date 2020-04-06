@@ -25,9 +25,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        ClientHandle.cpp
+        ClientHandle.cpp \
+    RoomListUi.cpp \
+    WindowManage.cpp \
+    HostRoomUi.cpp
 
 HEADERS  += ClientHandle.h \
-    protocol.h
+    protocol.h \
+    RoomListUi.h \
+    WindowManage.h \
+    HostRoomUi.h
 
-FORMS    += ClientHandle.ui
+FORMS    += ClientHandle.ui \
+    RoomListUi.ui \
+    HostRoomUi.ui
