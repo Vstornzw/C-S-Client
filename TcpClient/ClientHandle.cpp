@@ -25,6 +25,9 @@ ClientHandle::ClientHandle(QWidget *parent) :
   connect(ui_->btnRegist,SIGNAL(clicked(bool)),this,SLOT(onBtnRegistClicked()));
   connect(ui_->btnLogin,SIGNAL(clicked(bool)),this,SLOT(onBtnLoginClicked()));
 
+  //
+  connect(room_ui_,SIGNAL(sigCloseRoom()),this,SLOT(onQuitCloseRoom()));
+
   this->UiDesign();
 
 }
@@ -116,7 +119,15 @@ void ClientHandle::onReadyReadSlot() {
           QMessageBox::critical(this,"登录","未知错误");
         }
         break;
-
+      case Protocol::QuitClient:
+        if(p["result"].toString() == "QuitRoomTrue") {
+          QMessageBox::critical(this,"退出客户端","下线成功");
+          room_ui_->close();
+        } else if (p["result"].toString() == "QuitRoomFalse") {
+          QMessageBox::critical(this,"退出客户端","下线失败");
+        } else {
+          QMessageBox::critical(this,"退出客户端","未知错误");
+        }
 
       default:
         break;
@@ -160,3 +171,53 @@ void ClientHandle::onBtnLoginClicked() {
 
   this->tcp_socket->write(p.pack());
 }
+
+//==============room账户下线(对应RoomListUi.ui页面发来的信号)==============//
+
+void ClientHandle::onQuitCloseRoom() {
+  QString name = ui_->lineName->text();//ui_界面只是隐藏了 不是关闭了！！
+  QString comment = "关闭客户端";
+  Protocol p(Protocol::QuitClient);
+  p["user_name"] = name;
+  p["comment"] = comment;
+  qDebug()<<"客户端发出账户名："<<name;
+  this->tcp_socket->write(p.pack());
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

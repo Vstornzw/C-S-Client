@@ -30,6 +30,8 @@ private slots:
   void onBtnRegistClicked();
   void onBtnLoginClicked();
 
+  void onQuitCloseRoom();
+
 
 private:
   Ui::ClientHandle *ui_;

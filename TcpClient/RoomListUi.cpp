@@ -6,12 +6,21 @@ RoomListUi::RoomListUi(QWidget *parent) :
     ui_(new Ui::RoomListUi)
 {
     ui_->setupUi(this);
+    setWindowTitle("Tcp直播间(房间列表)");
+
+    connect(ui_->btn_QuitClient,SIGNAL(clicked(bool)),this,SLOT(onBtnQuitClicked()));
 }
 
 RoomListUi::~RoomListUi()
 {
     delete ui_;
 }
+
+void RoomListUi::onBtnQuitClicked() {
+
+  emit sigCloseRoom();
+}
+
 
 void RoomListUi::LeRoomList(Protocol p) {
 
