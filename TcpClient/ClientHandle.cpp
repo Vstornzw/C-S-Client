@@ -25,8 +25,9 @@ ClientHandle::ClientHandle(QWidget *parent) :
   connect(ui_->btnRegist,SIGNAL(clicked(bool)),this,SLOT(onBtnRegistClicked()));
   connect(ui_->btnLogin,SIGNAL(clicked(bool)),this,SLOT(onBtnLoginClicked()));
 
-  //
+
   connect(room_ui_,SIGNAL(sigCloseRoom()),this,SLOT(onQuitCloseRoom()));
+  connect(room_ui_,SIGNAL(sigDeleteUser()),this,SLOT(onDeleteUser()));
 
   this->UiDesign();
 
@@ -112,7 +113,6 @@ void ClientHandle::onReadyReadSlot() {
           this->close();
           room_ui_->LeRoomList(p);
           room_ui_->show();
-
         } else if(p["result"].toString() == "LoginFalse") {
           QMessageBox::critical(this,"登录","登录失败");
         } else {
@@ -123,12 +123,30 @@ void ClientHandle::onReadyReadSlot() {
         if(p["result"].toString() == "QuitRoomTrue") {
           QMessageBox::critical(this,"退出客户端","下线成功");
           room_ui_->close();
+          //host_ui_->close();--------------------------------------------------------------------------
+          this->show();
+          this->ui_->lineName->clear();
+          this->ui_->linePwd->clear();
         } else if (p["result"].toString() == "QuitRoomFalse") {
           QMessageBox::critical(this,"退出客户端","下线失败");
         } else {
           QMessageBox::critical(this,"退出客户端","未知错误");
         }
-
+        break;
+      case Protocol::DeleteUser:
+        if(p["result"].toString() == "DeleteUserTrue"){
+          QMessageBox::critical(this,"注销账户","注销成功");
+          room_ui_->close();
+          //host_ui_->close();--------------------------------------------------------------------------
+          this->show();
+          this->ui_->lineName->clear();
+          this->ui_->linePwd->clear();
+        } else if(p["result"] == "DeleteUserFalse") {
+          QMessageBox::critical(this,"注销账户","注销失败");
+        } else {
+          QMessageBox::critical(this,"注销账户","未知错误");
+        }
+        break;
       default:
         break;
       }
@@ -184,8 +202,17 @@ void ClientHandle::onQuitCloseRoom() {
   this->tcp_socket->write(p.pack());
 }
 
+//=========账户注销==============//
 
-
+void ClientHandle::onDeleteUser() {
+  QString name = ui_->lineName->text();
+  QString comment = "注销账户";
+  Protocol p(Protocol::DeleteUser);
+  p["user_name"] = name;
+  p["comment"] = comment;
+  qDebug()<<"客户端发出账户名"<<name;
+  this->tcp_socket->write(p.pack());
+}
 
 
 

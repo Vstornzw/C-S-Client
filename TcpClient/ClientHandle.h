@@ -31,6 +31,7 @@ private slots:
   void onBtnLoginClicked();
 
   void onQuitCloseRoom();
+  void onDeleteUser();
 
 
 private:

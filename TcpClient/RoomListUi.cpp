@@ -9,6 +9,7 @@ RoomListUi::RoomListUi(QWidget *parent) :
     setWindowTitle("Tcp直播间(房间列表)");
 
     connect(ui_->btn_QuitClient,SIGNAL(clicked(bool)),this,SLOT(onBtnQuitClicked()));
+    connect(ui_->btn_DeleteUser,SIGNAL(clicked(bool)),this,SLOT(onBtnDeleteUser()));
 }
 
 RoomListUi::~RoomListUi()
@@ -16,8 +17,11 @@ RoomListUi::~RoomListUi()
     delete ui_;
 }
 
-void RoomListUi::onBtnQuitClicked() {
+void RoomListUi::onBtnDeleteUser() {
+  emit sigDeleteUser();
+}
 
+void RoomListUi::onBtnQuitClicked() {
   emit sigCloseRoom();
 }
 

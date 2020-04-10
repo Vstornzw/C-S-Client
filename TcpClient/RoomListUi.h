@@ -21,10 +21,13 @@ public:
 
 signals:
   void sigCloseRoom();
+  void sigDeleteUser();
 
 private slots:
   //退出账户
   void onBtnQuitClicked();
+  //注销账户
+  void onBtnDeleteUser();
 private:
   Ui::RoomListUi *ui_;
 };
