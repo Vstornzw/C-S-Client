@@ -4,7 +4,6 @@
 #include <QMessageBox>
 #include <QDebug>
 
-
 ClientHandle::ClientHandle(QWidget *parent) :
     QWidget(parent),
     ui_(new Ui::ClientHandle) {
@@ -28,6 +27,7 @@ ClientHandle::ClientHandle(QWidget *parent) :
 
   connect(room_ui_,SIGNAL(sigCloseRoom()),this,SLOT(onQuitCloseRoom()));
   connect(room_ui_,SIGNAL(sigDeleteUser()),this,SLOT(onDeleteUser()));
+  connect(room_ui_,SIGNAL(sigChargeMoney(QString)),SLOT(onChargeMoney(QString)));//这里参数！！！注意传递了参数值
 
   this->UiDesign();
 
@@ -103,9 +103,9 @@ void ClientHandle::onReadyReadSlot() {
           if(p["result"].toString() == "registTrue") {
             QMessageBox::information(this,"注册","注册成功");
           } else if (p["result"].toString() == "registFalse") {
-            QMessageBox::information(this,"注册","注册失败");
+            QMessageBox::critical(this,"注册","注册失败");
           } else {
-            QMessageBox::information(this,"注册","未知错误");
+            QMessageBox::critical(this,"注册","未知错误");
           }
         break;
       case Protocol::Login:
@@ -121,7 +121,7 @@ void ClientHandle::onReadyReadSlot() {
         break;
       case Protocol::QuitClient:
         if(p["result"].toString() == "QuitRoomTrue") {
-          QMessageBox::critical(this,"退出客户端","下线成功");
+          QMessageBox::information(this,"退出客户端","下线成功");
           room_ui_->close();
           //host_ui_->close();--------------------------------------------------------------------------
           this->show();
@@ -135,7 +135,7 @@ void ClientHandle::onReadyReadSlot() {
         break;
       case Protocol::DeleteUser:
         if(p["result"].toString() == "DeleteUserTrue"){
-          QMessageBox::critical(this,"注销账户","注销成功");
+          QMessageBox::information(this,"注销账户","注销成功");
           room_ui_->close();
           //host_ui_->close();--------------------------------------------------------------------------
           this->show();
@@ -145,6 +145,16 @@ void ClientHandle::onReadyReadSlot() {
           QMessageBox::critical(this,"注销账户","注销失败");
         } else {
           QMessageBox::critical(this,"注销账户","未知错误");
+        }
+        break;
+      case Protocol::Charge:
+        if(p["result"].toString() == "ChargeMoneyTrue") {
+          QMessageBox::information(this,"账户充值","充值成功");
+          room_ui_->LeRoomList(p);
+        } else if(p["result"].toString() == "ChargeMoneyFalse") {
+          QMessageBox::critical(this,"账户充值","充值失败");
+        } else {
+          QMessageBox::critical(this,"账户充值","未知错误");
         }
         break;
       default:
@@ -214,7 +224,19 @@ void ClientHandle::onDeleteUser() {
   this->tcp_socket->write(p.pack());
 }
 
+//======账户充值=====//
+void ClientHandle::onChargeMoney(QString str) {
 
+  QString name = ui_->lineName->text();
+  double money = str.toDouble();
+  qDebug()<<"客户端发出充值金额："<<money;
+
+  Protocol p(Protocol::Charge);
+  p["user_name"] = name;
+  p["money"] = money;
+  this->tcp_socket->write(p.pack());
+
+}
 
 
 

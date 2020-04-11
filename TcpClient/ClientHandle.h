@@ -32,6 +32,8 @@ private slots:
 
   void onQuitCloseRoom();
   void onDeleteUser();
+  //账户充值
+  void onChargeMoney(QString str);
 
 
 private:

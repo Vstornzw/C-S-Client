@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include "protocol.h"
-
+#include <QMessageBox>
 namespace Ui {
 class RoomListUi;
 }
@@ -22,12 +22,16 @@ public:
 signals:
   void sigCloseRoom();
   void sigDeleteUser();
+  //账户充值
+  void sigChargeMoney(QString str);
 
 private slots:
   //退出账户
   void onBtnQuitClicked();
   //注销账户
   void onBtnDeleteUser();
+  //账户充值
+  void onBtnChargeMoney();
 private:
   Ui::RoomListUi *ui_;
 };
