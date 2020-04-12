@@ -27,7 +27,9 @@ ClientHandle::ClientHandle(QWidget *parent) :
 
   connect(room_ui_,SIGNAL(sigCloseRoom()),this,SLOT(onQuitCloseRoom()));
   connect(room_ui_,SIGNAL(sigDeleteUser()),this,SLOT(onDeleteUser()));
-  connect(room_ui_,SIGNAL(sigChargeMoney(QString)),SLOT(onChargeMoney(QString)));//这里参数！！！注意传递了参数值
+  connect(room_ui_,SIGNAL(sigChargeMoney(QString)),this,SLOT(onChargeMoney(QString)));//这里参数！！！注意传递了参数值
+
+  connect(room_ui_,SIGNAL(sigCreateHostRoom()),this,SLOT(onHostRoomCreate()));
 
   this->UiDesign();
 
@@ -157,6 +159,12 @@ void ClientHandle::onReadyReadSlot() {
           QMessageBox::critical(this,"账户充值","未知错误");
         }
         break;
+      case Protocol::CreateRoom:
+        if(p["result"].toString() == "CreateRoomTrue") {
+          host_ui_->CreateHostRoom(p);
+          room_ui_->hide();
+          host_ui_->show();
+        }
       default:
         break;
       }
@@ -238,6 +246,19 @@ void ClientHandle::onChargeMoney(QString str) {
 
 }
 
+//======创建主播房间======//
+void ClientHandle::onHostRoomCreate() {
+  RoomListUi* room_ui_ = WindowManage::GetInstance()->GetRoomListUi();
+  QString name = ui_->lineName->text();
+  QString pswd = ui_->linePwd->text();
+  QString room_name = room_ui_->GetHostRoomNameText();
+
+  Protocol p(Protocol::CreateRoom);
+  p["user_name"] = name;
+  p["user_pwd"] = pswd;
+  p["room_name"] = room_name;
+  this->tcp_socket->write(p.pack());
+}
 
 
 

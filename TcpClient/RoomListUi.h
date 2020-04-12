@@ -18,12 +18,15 @@ public:
 
   //展示在RoomListUi界面上的相关信息
   void LeRoomList(Protocol p);
-
+  //获取主播房间名：le_HostRoomName->text()
+  QString GetHostRoomNameText();
 signals:
   void sigCloseRoom();
   void sigDeleteUser();
   //账户充值
   void sigChargeMoney(QString str);
+  //发送创建主播房间信号
+  void sigCreateHostRoom();
 
 private slots:
   //退出账户
@@ -32,6 +35,8 @@ private slots:
   void onBtnDeleteUser();
   //账户充值
   void onBtnChargeMoney();
+  //创建主播房间
+  void onBtnCreateHostRoom();
 private:
   Ui::RoomListUi *ui_;
 };

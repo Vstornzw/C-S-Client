@@ -34,6 +34,8 @@ private slots:
   void onDeleteUser();
   //账户充值
   void onChargeMoney(QString str);
+  //创建主播房间
+  void onHostRoomCreate();
 
 
 private:

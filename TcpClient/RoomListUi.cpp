@@ -16,6 +16,7 @@ RoomListUi::RoomListUi(QWidget *parent) :
     connect(ui_->btn_DeleteUser,SIGNAL(clicked(bool)),this,SLOT(onBtnDeleteUser()));
 
     connect(ui_->btn_chargeMoney,SIGNAL(clicked(bool)),this,SLOT(onBtnChargeMoney()));
+    connect(ui_->btn_CreatHostRoom,SIGNAL(clicked(bool)),this,SLOT(onBtnCreateHostRoom()));
 }
 
 RoomListUi::~RoomListUi()
@@ -63,4 +64,19 @@ void RoomListUi::onBtnChargeMoney() {
     return;
   }
   emit sigChargeMoney(str);
+}
+
+
+void RoomListUi::onBtnCreateHostRoom() {
+  emit sigCreateHostRoom();
+}
+
+QString RoomListUi::GetHostRoomNameText() {
+
+  //设置正则表达
+  QRegExp rx("[a-zA-Z][0-9]{10}");
+  ui_->le_HostRoomName->setValidator(new QRegExpValidator(rx,this));
+
+  QString name = ui_->le_HostRoomName->text();
+  return name;
 }

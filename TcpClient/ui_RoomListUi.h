@@ -35,9 +35,9 @@ public:
     QPushButton *btn_DeleteUser;
     QWidget *layoutWidget1;
     QGridLayout *gridLayout;
-    QPushButton *btn_creatRoom;
+    QPushButton *btn_CreatHostRoom;
     QLabel *label_2;
-    QLineEdit *le_roomName;
+    QLineEdit *le_HostRoomName;
     QPushButton *btn_chargeMoney;
     QLabel *label_3;
     QLineEdit *le_chargeMoney;
@@ -49,7 +49,7 @@ public:
     QLabel *label_6;
     QLineEdit *le_leverPer;
     QPushButton *btn_accountInformation;
-    QWidget *widget;
+    QWidget *layoutWidget2;
     QGridLayout *gridLayout_2;
     QLabel *label;
     QPushButton *btn_refresh;
@@ -88,20 +88,20 @@ public:
         gridLayout = new QGridLayout(layoutWidget1);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
-        btn_creatRoom = new QPushButton(layoutWidget1);
-        btn_creatRoom->setObjectName(QStringLiteral("btn_creatRoom"));
+        btn_CreatHostRoom = new QPushButton(layoutWidget1);
+        btn_CreatHostRoom->setObjectName(QStringLiteral("btn_CreatHostRoom"));
 
-        gridLayout->addWidget(btn_creatRoom, 0, 0, 1, 3);
+        gridLayout->addWidget(btn_CreatHostRoom, 0, 0, 1, 3);
 
         label_2 = new QLabel(layoutWidget1);
         label_2->setObjectName(QStringLiteral("label_2"));
 
         gridLayout->addWidget(label_2, 1, 0, 1, 2);
 
-        le_roomName = new QLineEdit(layoutWidget1);
-        le_roomName->setObjectName(QStringLiteral("le_roomName"));
+        le_HostRoomName = new QLineEdit(layoutWidget1);
+        le_HostRoomName->setObjectName(QStringLiteral("le_HostRoomName"));
 
-        gridLayout->addWidget(le_roomName, 1, 2, 1, 1);
+        gridLayout->addWidget(le_HostRoomName, 1, 2, 1, 1);
 
         btn_chargeMoney = new QPushButton(layoutWidget1);
         btn_chargeMoney->setObjectName(QStringLiteral("btn_chargeMoney"));
@@ -157,13 +157,13 @@ public:
 
         gridLayout->addWidget(btn_accountInformation, 5, 0, 1, 3);
 
-        widget = new QWidget(RoomListUi);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(41, 50, 147, 25));
-        gridLayout_2 = new QGridLayout(widget);
+        layoutWidget2 = new QWidget(RoomListUi);
+        layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
+        layoutWidget2->setGeometry(QRect(41, 50, 147, 25));
+        gridLayout_2 = new QGridLayout(layoutWidget2);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
-        label = new QLabel(widget);
+        label = new QLabel(layoutWidget2);
         label->setObjectName(QStringLiteral("label"));
         QFont font;
         font.setPointSize(12);
@@ -171,7 +171,7 @@ public:
 
         gridLayout_2->addWidget(label, 0, 0, 1, 1);
 
-        btn_refresh = new QPushButton(widget);
+        btn_refresh = new QPushButton(layoutWidget2);
         btn_refresh->setObjectName(QStringLiteral("btn_refresh"));
 
         gridLayout_2->addWidget(btn_refresh, 0, 1, 1, 1);
@@ -187,7 +187,7 @@ public:
         RoomListUi->setWindowTitle(QApplication::translate("RoomListUi", "Form", Q_NULLPTR));
         btn_QuitClient->setText(QApplication::translate("RoomListUi", "\344\270\213\347\272\277", Q_NULLPTR));
         btn_DeleteUser->setText(QApplication::translate("RoomListUi", "\346\263\250\351\224\200", Q_NULLPTR));
-        btn_creatRoom->setText(QApplication::translate("RoomListUi", "\345\210\233\345\273\272\346\210\277\351\227\264", Q_NULLPTR));
+        btn_CreatHostRoom->setText(QApplication::translate("RoomListUi", "\345\210\233\345\273\272\344\270\273\346\222\255\346\210\277\351\227\264", Q_NULLPTR));
         label_2->setText(QApplication::translate("RoomListUi", "\346\210\277\351\227\264\345\220\215", Q_NULLPTR));
         btn_chargeMoney->setText(QApplication::translate("RoomListUi", "\345\205\205\345\200\274\351\207\221\351\242\235", Q_NULLPTR));
         label_3->setText(QApplication::translate("RoomListUi", "\351\207\221 \351\242\235", Q_NULLPTR));
