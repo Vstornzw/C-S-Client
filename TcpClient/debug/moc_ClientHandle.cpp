@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_ClientHandle_t {
-    QByteArrayData data[10];
-    char stringdata0[131];
+    QByteArrayData data[11];
+    char stringdata0[147];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,13 +40,14 @@ QT_MOC_LITERAL(5, 67, 15), // "onQuitCloseRoom"
 QT_MOC_LITERAL(6, 83, 12), // "onDeleteUser"
 QT_MOC_LITERAL(7, 96, 13), // "onChargeMoney"
 QT_MOC_LITERAL(8, 110, 3), // "str"
-QT_MOC_LITERAL(9, 114, 16) // "onHostRoomCreate"
+QT_MOC_LITERAL(9, 114, 16), // "onHostRoomCreate"
+QT_MOC_LITERAL(10, 131, 15) // "onCloseHostRoom"
 
     },
     "ClientHandle\0onReadyReadSlot\0\0"
     "onBtnRegistClicked\0onBtnLoginClicked\0"
     "onQuitCloseRoom\0onDeleteUser\0onChargeMoney\0"
-    "str\0onHostRoomCreate"
+    "str\0onHostRoomCreate\0onCloseHostRoom"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +57,7 @@ static const uint qt_meta_data_ClientHandle[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,13 +65,14 @@ static const uint qt_meta_data_ClientHandle[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x08 /* Private */,
-       3,    0,   50,    2, 0x08 /* Private */,
-       4,    0,   51,    2, 0x08 /* Private */,
-       5,    0,   52,    2, 0x08 /* Private */,
-       6,    0,   53,    2, 0x08 /* Private */,
-       7,    1,   54,    2, 0x08 /* Private */,
-       9,    0,   57,    2, 0x08 /* Private */,
+       1,    0,   54,    2, 0x08 /* Private */,
+       3,    0,   55,    2, 0x08 /* Private */,
+       4,    0,   56,    2, 0x08 /* Private */,
+       5,    0,   57,    2, 0x08 /* Private */,
+       6,    0,   58,    2, 0x08 /* Private */,
+       7,    1,   59,    2, 0x08 /* Private */,
+       9,    0,   62,    2, 0x08 /* Private */,
+      10,    1,   63,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -80,6 +82,7 @@ static const uint qt_meta_data_ClientHandle[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    8,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    8,
 
        0        // eod
 };
@@ -97,6 +100,7 @@ void ClientHandle::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id
         case 4: _t->onDeleteUser(); break;
         case 5: _t->onChargeMoney((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 6: _t->onHostRoomCreate(); break;
+        case 7: _t->onCloseHostRoom((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -127,13 +131,13 @@ int ClientHandle::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }

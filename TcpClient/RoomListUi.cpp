@@ -73,10 +73,59 @@ void RoomListUi::onBtnCreateHostRoom() {
 
 QString RoomListUi::GetHostRoomNameText() {
 
-  //设置正则表达
-  QRegExp rx("[a-zA-Z][0-9]{10}");
-  ui_->le_HostRoomName->setValidator(new QRegExpValidator(rx,this));
+//  设置正则表达
+//  QRegExp rx("[a-zA-Z][0-9]{10}");
+//  ui_->le_HostRoomName->setValidator(new QRegExpValidator(rx,this));
+
 
   QString name = ui_->le_HostRoomName->text();
+  ui_->le_HostRoomName->clear();
   return name;
 }
+
+void RoomListUi::HostRoomPlay(Protocol p) {
+  int count = 1;
+  ui_->listWidget->clear();
+  QString header;
+  header += "*******************房间号*******************";
+  ui_->listWidget->addItem(header);
+  while(p[QString::number(count)].isNull() == false) {
+    QString values = p[QString::number(count)].toString();
+    ui_->listWidget->insertItem(count,values);
+    count++;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

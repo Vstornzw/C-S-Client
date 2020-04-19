@@ -36,6 +36,8 @@ private slots:
   void onChargeMoney(QString str);
   //创建主播房间
   void onHostRoomCreate();
+  //关闭主播直播间
+  void onCloseHostRoom(QString str);
 
 
 private:

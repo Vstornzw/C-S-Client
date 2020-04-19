@@ -7,6 +7,8 @@ HostRoomUi::HostRoomUi(QWidget *parent) :
     ui_(new Ui::HostRoomUi)
 {
     ui_->setupUi(this);
+
+    connect(ui_->btn_close_,SIGNAL(clicked(bool)),this,SLOT(onCloseHostRoom()));
 }
 
 HostRoomUi::~HostRoomUi()
@@ -46,3 +48,27 @@ void HostRoomUi::HostRoomShow(QString hostname, QString money, QString level) {
   ui_->le_RoomMoney->setText(money);
   ui_->le_RoomLevel->setText(level);
 }
+
+//===关闭直播间===//
+void HostRoomUi::onCloseHostRoom() {
+  QString host_name = ui_->le_RoomName->text();
+  emit sigCloseHostRoom(host_name);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -21,6 +21,7 @@ ClientHandle::ClientHandle(QWidget *parent) :
 
   connect(this->tcp_socket,SIGNAL(readyRead()),this,SLOT(onReadyReadSlot()));
 
+
   connect(ui_->btnRegist,SIGNAL(clicked(bool)),this,SLOT(onBtnRegistClicked()));
   connect(ui_->btnLogin,SIGNAL(clicked(bool)),this,SLOT(onBtnLoginClicked()));
 
@@ -30,6 +31,9 @@ ClientHandle::ClientHandle(QWidget *parent) :
   connect(room_ui_,SIGNAL(sigChargeMoney(QString)),this,SLOT(onChargeMoney(QString)));//这里参数！！！注意传递了参数值
 
   connect(room_ui_,SIGNAL(sigCreateHostRoom()),this,SLOT(onHostRoomCreate()));
+
+
+  connect(host_ui_,SIGNAL(sigCloseHostRoom(QString)),this,SLOT(onCloseHostRoom(QString)));
 
   this->UiDesign();
 
@@ -82,9 +86,9 @@ bool ClientHandle::eventFilter(QObject *obj, QEvent *event) {
     } else {
       return false;
     }
-  } else {
-    return ClientHandle::eventFilter(obj,event);
   }
+  return QWidget::eventFilter(obj,event);
+
 }
 
 //=====客户端从Tcp协议中读取到的数据，包含返回包并解析=====//
@@ -125,7 +129,7 @@ void ClientHandle::onReadyReadSlot() {
         if(p["result"].toString() == "QuitRoomTrue") {
           QMessageBox::information(this,"退出客户端","下线成功");
           room_ui_->close();
-          //host_ui_->close();--------------------------------------------------------------------------
+          host_ui_->close();//--------------------------------------------------------------------------
           this->show();
           this->ui_->lineName->clear();
           this->ui_->linePwd->clear();
@@ -139,7 +143,7 @@ void ClientHandle::onReadyReadSlot() {
         if(p["result"].toString() == "DeleteUserTrue"){
           QMessageBox::information(this,"注销账户","注销成功");
           room_ui_->close();
-          //host_ui_->close();--------------------------------------------------------------------------
+          host_ui_->close();//--------------------------------------------------------------------------
           this->show();
           this->ui_->lineName->clear();
           this->ui_->linePwd->clear();
@@ -164,7 +168,41 @@ void ClientHandle::onReadyReadSlot() {
           host_ui_->CreateHostRoom(p);
           room_ui_->hide();
           host_ui_->show();
+        } else if(p["result"].toString() == "CreateRoomFalse") {
+          QMessageBox::critical(this,"房间","创建失败");
+        } else {
+          QMessageBox::critical(this,"房间","未知错误");
         }
+      case Protocol::RoomList:
+        if(p["result"].toString() == "RoomListTrue") {
+          /*直播间列表--显示在房间左边的那个链表里面*/
+          qDebug()<<"aaa";
+          room_ui_->HostRoomPlay(p);
+        } else if (p["result"].toString() == "RoomListFalse") {
+          QMessageBox::critical(this, "直播间列表", "刷新失败");
+        }else{
+          QMessageBox::critical(this, "直播间列表", "未知错误");
+        }
+      break;
+      case Protocol::CloseRoom:
+        if(p["result"].toString() == "CloseHostRoomTrue") {
+          host_ui_->close();
+          room_ui_->show();
+        }else if(p["result"].toString() == "CloseHostRoomFalse"){
+          QMessageBox::critical(this, "关闭直播间", "关闭失败");
+      }else{
+          QMessageBox::critical(this, "关闭直播间", "未知错误");
+      }
+      break;
+      case Protocol::RoomListPer:
+        if(p["result"].toString() == "RoomListPerTrue") {
+          room_ui_->LeRoomList(p);
+        } else if(p["result"].toString() == "RoomListPerFalse"){
+          QMessageBox::critical(this, "大厅账户刷新", "刷新失败!!");
+        } else {
+          QMessageBox::critical(this, "大厅账户刷新", "未知错误");
+        }
+        break;
       default:
         break;
       }
@@ -260,8 +298,15 @@ void ClientHandle::onHostRoomCreate() {
   this->tcp_socket->write(p.pack());
 }
 
-
-
+//======关闭主播房间======//
+void ClientHandle::onCloseHostRoom(QString str) {
+  QString name = ui_->lineName->text();
+  Protocol p(Protocol::CloseRoom);
+  p["host_name"] = str;
+  p["user_name"] = name;
+  qDebug() <<"客户端发出房间名/账户名:" << str << name;
+  this->tcp_socket->write(p.pack());
+}
 
 
 

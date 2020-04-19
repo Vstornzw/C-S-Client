@@ -14,7 +14,7 @@ class HostRoomUi;
 class HostRoomUi : public QMainWindow {
     Q_OBJECT
 
-public:
+ public:
   explicit HostRoomUi(QWidget *parent = 0);
   ~HostRoomUi();
   //创建主播房间
@@ -28,7 +28,14 @@ public:
   /*实现money和lever显示在主播房间HostRoomUi.ui页面*/
   void HostRoomShow(QString hostname,QString money,QString level);
 
-private:
+ signals:
+  void sigCloseHostRoom(QString str);
+
+ private slots:
+  void onCloseHostRoom();
+
+
+ private:
   Ui::HostRoomUi *ui_;
   /*HostAddress类提供一个IP地址*/
   QHostAddress groupAddress;

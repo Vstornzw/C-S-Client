@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "protocol.h"
 #include <QMessageBox>
+#include <protocol.h>
 namespace Ui {
 class RoomListUi;
 }
@@ -20,6 +21,8 @@ public:
   void LeRoomList(Protocol p);
   //获取主播房间名：le_HostRoomName->text()
   QString GetHostRoomNameText();
+  //直播间列表--显示在房间左边的那个链表里面
+  void HostRoomPlay(Protocol p);
 signals:
   void sigCloseRoom();
   void sigDeleteUser();
