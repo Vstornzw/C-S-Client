@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RoomListUi_t {
-    QByteArrayData data[11];
-    char stringdata0[146];
+    QByteArrayData data[15];
+    char stringdata0[208];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,16 +38,22 @@ QT_MOC_LITERAL(3, 25, 13), // "sigDeleteUser"
 QT_MOC_LITERAL(4, 39, 14), // "sigChargeMoney"
 QT_MOC_LITERAL(5, 54, 3), // "str"
 QT_MOC_LITERAL(6, 58, 17), // "sigCreateHostRoom"
-QT_MOC_LITERAL(7, 76, 16), // "onBtnQuitClicked"
-QT_MOC_LITERAL(8, 93, 15), // "onBtnDeleteUser"
-QT_MOC_LITERAL(9, 109, 16), // "onBtnChargeMoney"
-QT_MOC_LITERAL(10, 126, 19) // "onBtnCreateHostRoom"
+QT_MOC_LITERAL(7, 76, 15), // "sigJoinHostRoom"
+QT_MOC_LITERAL(8, 92, 16), // "onBtnQuitClicked"
+QT_MOC_LITERAL(9, 109, 15), // "onBtnDeleteUser"
+QT_MOC_LITERAL(10, 125, 16), // "onBtnChargeMoney"
+QT_MOC_LITERAL(11, 142, 19), // "onBtnCreateHostRoom"
+QT_MOC_LITERAL(12, 162, 23), // "onDoubleClickedHostRoom"
+QT_MOC_LITERAL(13, 186, 16), // "QListWidgetItem*"
+QT_MOC_LITERAL(14, 203, 4) // "item"
 
     },
     "RoomListUi\0sigCloseRoom\0\0sigDeleteUser\0"
     "sigChargeMoney\0str\0sigCreateHostRoom\0"
-    "onBtnQuitClicked\0onBtnDeleteUser\0"
-    "onBtnChargeMoney\0onBtnCreateHostRoom"
+    "sigJoinHostRoom\0onBtnQuitClicked\0"
+    "onBtnDeleteUser\0onBtnChargeMoney\0"
+    "onBtnCreateHostRoom\0onDoubleClickedHostRoom\0"
+    "QListWidgetItem*\0item"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,36 +63,40 @@ static const uint qt_meta_data_RoomListUi[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       4,       // signalCount
+       5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   54,    2, 0x06 /* Public */,
-       3,    0,   55,    2, 0x06 /* Public */,
-       4,    1,   56,    2, 0x06 /* Public */,
-       6,    0,   59,    2, 0x06 /* Public */,
+       1,    0,   64,    2, 0x06 /* Public */,
+       3,    0,   65,    2, 0x06 /* Public */,
+       4,    1,   66,    2, 0x06 /* Public */,
+       6,    0,   69,    2, 0x06 /* Public */,
+       7,    1,   70,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    0,   60,    2, 0x08 /* Private */,
-       8,    0,   61,    2, 0x08 /* Private */,
-       9,    0,   62,    2, 0x08 /* Private */,
-      10,    0,   63,    2, 0x08 /* Private */,
+       8,    0,   73,    2, 0x08 /* Private */,
+       9,    0,   74,    2, 0x08 /* Private */,
+      10,    0,   75,    2, 0x08 /* Private */,
+      11,    0,   76,    2, 0x08 /* Private */,
+      12,    1,   77,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    5,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    5,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 13,   14,
 
        0        // eod
 };
@@ -101,10 +111,12 @@ void RoomListUi::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->sigDeleteUser(); break;
         case 2: _t->sigChargeMoney((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 3: _t->sigCreateHostRoom(); break;
-        case 4: _t->onBtnQuitClicked(); break;
-        case 5: _t->onBtnDeleteUser(); break;
-        case 6: _t->onBtnChargeMoney(); break;
-        case 7: _t->onBtnCreateHostRoom(); break;
+        case 4: _t->sigJoinHostRoom((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 5: _t->onBtnQuitClicked(); break;
+        case 6: _t->onBtnDeleteUser(); break;
+        case 7: _t->onBtnChargeMoney(); break;
+        case 8: _t->onBtnCreateHostRoom(); break;
+        case 9: _t->onDoubleClickedHostRoom((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -138,6 +150,13 @@ void RoomListUi::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
                 return;
             }
         }
+        {
+            typedef void (RoomListUi::*_t)(QString );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&RoomListUi::sigJoinHostRoom)) {
+                *result = 4;
+                return;
+            }
+        }
     }
 }
 
@@ -166,13 +185,13 @@ int RoomListUi::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 8)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 8;
+        _id -= 10;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 8)
+        if (_id < 10)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 8;
+        _id -= 10;
     }
     return _id;
 }
@@ -200,6 +219,13 @@ void RoomListUi::sigChargeMoney(QString _t1)
 void RoomListUi::sigCreateHostRoom()
 {
     QMetaObject::activate(this, &staticMetaObject, 3, Q_NULLPTR);
+}
+
+// SIGNAL 4
+void RoomListUi::sigJoinHostRoom(QString _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 4, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

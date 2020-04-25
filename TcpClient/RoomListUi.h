@@ -5,6 +5,7 @@
 #include "protocol.h"
 #include <QMessageBox>
 #include <protocol.h>
+#include <QListWidgetItem>
 namespace Ui {
 class RoomListUi;
 }
@@ -30,6 +31,8 @@ signals:
   void sigChargeMoney(QString str);
   //发送创建主播房间信号
   void sigCreateHostRoom();
+  //加入主播直播间
+  void sigJoinHostRoom(QString str);
 
 private slots:
   //退出账户
@@ -40,6 +43,8 @@ private slots:
   void onBtnChargeMoney();
   //创建主播房间
   void onBtnCreateHostRoom();
+  //双击加入主播房间(注意有参数传递)
+  void onDoubleClickedHostRoom(QListWidgetItem *item);
 private:
   Ui::RoomListUi *ui_;
 };

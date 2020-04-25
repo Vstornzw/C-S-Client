@@ -27,6 +27,12 @@ class HostRoomUi : public QMainWindow {
   }
   /*实现money和lever显示在主播房间HostRoomUi.ui页面*/
   void HostRoomShow(QString hostname,QString money,QString level);
+  //更新游客的房间信息
+  void UpdateVisitorRoomInformation(Protocol p);
+  /*实现money和lever显示在游客房间HostRoomUi.ui页面*/
+  void VisitorRoomShow(QString host_room_name, QString money, QString level, QString host_name, QString audience);
+  //HostRoomUi.ui界面上"群成员列表"展现问题
+  void UserListPlay(Protocol p);
 
  signals:
   void sigCloseHostRoom(QString str);

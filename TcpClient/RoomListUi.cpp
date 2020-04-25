@@ -17,6 +17,8 @@ RoomListUi::RoomListUi(QWidget *parent) :
 
     connect(ui_->btn_chargeMoney,SIGNAL(clicked(bool)),this,SLOT(onBtnChargeMoney()));
     connect(ui_->btn_CreatHostRoom,SIGNAL(clicked(bool)),this,SLOT(onBtnCreateHostRoom()));
+
+    connect(ui_->listWidget,SIGNAL(itemDoubleClicked(QListWidgetItem*)),this,SLOT(onDoubleClickedHostRoom(QListWidgetItem*)));//双击加入主播房间(注意有参数传递)
 }
 
 RoomListUi::~RoomListUi()
@@ -83,6 +85,7 @@ QString RoomListUi::GetHostRoomNameText() {
   return name;
 }
 
+//对应着服务器中RoomManage.cpp中RoomListHandle()函数
 void RoomListUi::HostRoomPlay(Protocol p) {
   int count = 1;
   ui_->listWidget->clear();
@@ -96,6 +99,11 @@ void RoomListUi::HostRoomPlay(Protocol p) {
   }
 }
 
+//====观众双击进去主播房间====//
+void RoomListUi::onDoubleClickedHostRoom(QListWidgetItem *item) {
+  QString str = item->text();
+  emit sigJoinHostRoom(str);
+}
 
 
 

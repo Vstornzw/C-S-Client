@@ -31,7 +31,7 @@ ClientHandle::ClientHandle(QWidget *parent) :
   connect(room_ui_,SIGNAL(sigChargeMoney(QString)),this,SLOT(onChargeMoney(QString)));//这里参数！！！注意传递了参数值
 
   connect(room_ui_,SIGNAL(sigCreateHostRoom()),this,SLOT(onHostRoomCreate()));
-
+  connect(room_ui_,SIGNAL(sigJoinHostRoom(QString)),this,SLOT(onJoinHostRoom(QString)));
 
   connect(host_ui_,SIGNAL(sigCloseHostRoom(QString)),this,SLOT(onCloseHostRoom(QString)));
 
@@ -203,6 +203,21 @@ void ClientHandle::onReadyReadSlot() {
           QMessageBox::critical(this, "大厅账户刷新", "未知错误");
         }
         break;
+      case Protocol::JoinRoom:
+        if(p["result"].toString() == "JoinHostRoomTrue") {
+          room_ui_->hide();
+          host_ui_->show();
+          host_ui_->UpdateVisitorRoomInformation(p);
+        } else if(p["result"].toString() == "JoinRoomFalse"){
+          QMessageBox::critical(this, "直播房间", "加入失败");
+        } else {
+          QMessageBox::critical(this, "直播房间", "未知错误");
+        }
+        break;
+      case Protocol::UserLset:
+        if(p["result"].toString() == "UserListTrue") {
+          host_ui_->UserListPlay(p);
+        }
       default:
         break;
       }
@@ -298,7 +313,7 @@ void ClientHandle::onHostRoomCreate() {
   this->tcp_socket->write(p.pack());
 }
 
-//======关闭主播房间======//
+//======主播或者游客关闭房间======//
 void ClientHandle::onCloseHostRoom(QString str) {
   QString name = ui_->lineName->text();
   Protocol p(Protocol::CloseRoom);
@@ -309,7 +324,16 @@ void ClientHandle::onCloseHostRoom(QString str) {
 }
 
 
+//========room观众双击进去主播账户(对应RoomListUi.ui页面发来的信号)========//
+void ClientHandle::onJoinHostRoom(QString host_room_name) {
+  QString name = ui_->lineName->text();
+  Protocol p(Protocol::JoinRoom);
+  p["host_room_name"] = host_room_name;
+  p["user_name"] = name;
 
+  qDebug()<<"客户端双击传递的房间名："<<host_room_name;
+  this->tcp_socket->write(p.pack());
+}
 
 
 

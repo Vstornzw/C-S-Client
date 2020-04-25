@@ -38,6 +38,8 @@ private slots:
   void onHostRoomCreate();
   //关闭主播直播间
   void onCloseHostRoom(QString str);
+  //观众加入主播房间
+  void onJoinHostRoom(QString host_room_name);
 
 
 private:
