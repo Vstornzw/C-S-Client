@@ -6,37 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1177</width>
-    <height>914</height>
+    <width>1103</width>
+    <height>621</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLineEdit" name="le_chatsend">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>520</y>
-      <width>491</width>
-      <height>31</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>520</y>
-      <width>75</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>发送</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="lab_view">
     <property name="geometry">
      <rect>
@@ -164,9 +141,9 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>490</y>
-      <width>575</width>
+      <x>60</x>
+      <y>480</y>
+      <width>691</width>
       <height>22</height>
      </rect>
     </property>
@@ -218,9 +195,9 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>51</x>
-      <y>451</y>
-      <width>571</width>
+      <x>60</x>
+      <y>440</y>
+      <width>691</width>
       <height>25</height>
      </rect>
     </property>
@@ -321,62 +298,55 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>780</x>
+      <x>790</x>
       <y>440</y>
-      <width>158</width>
-      <height>112</height>
+      <width>291</width>
+      <height>131</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_6">
      <item row="0" column="0">
-      <widget class="QPushButton" name="pushButton_9">
+      <widget class="QPushButton" name="btn_view_open_">
        <property name="text">
-        <string>PushButton</string>
+        <string>开启摄像头</string>
        </property>
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QPushButton" name="pushButton_10">
+      <widget class="QPushButton" name="btn_vioce_open_">
        <property name="text">
-        <string>PushButton</string>
+        <string>打开麦克风</string>
        </property>
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QPushButton" name="pushButton_11">
+      <widget class="QPushButton" name="btn_view_close_">
        <property name="text">
-        <string>PushButton</string>
+        <string>关闭摄像头</string>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QPushButton" name="pushButton_12">
+      <widget class="QPushButton" name="btn_vioce_close_">
        <property name="text">
-        <string>PushButton</string>
+        <string>关闭麦克风</string>
        </property>
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QPushButton" name="pushButton_13">
+      <widget class="QPushButton" name="btn_barrage_on_">
        <property name="text">
-        <string>PushButton</string>
+        <string>打开弹幕</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QPushButton" name="pushButton_14">
+      <widget class="QPushButton" name="btn_exceptional_">
        <property name="text">
-        <string>PushButton</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QPushButton" name="pushButton_16">
-       <property name="text">
-        <string>PushButton</string>
+        <string>一键打赏</string>
        </property>
       </widget>
      </item>
@@ -387,6 +357,35 @@
        </property>
       </widget>
      </item>
+     <item row="3" column="0">
+      <widget class="QPushButton" name="btn_barrage_off_">
+       <property name="text">
+        <string>关闭弹幕</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>510</y>
+      <width>691</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout_7">
+     <item row="0" column="0">
+      <widget class="QLineEdit" name="le_chatsend"/>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>发送</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
    <zorder>layoutWidget</zorder>
@@ -394,27 +393,19 @@
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
    <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
+   <zorder>layoutWidget</zorder>
    <zorder>lab_barrage</zorder>
-   <zorder>le_chatsend</zorder>
-   <zorder>pushButton</zorder>
    <zorder>lab_view</zorder>
    <zorder>textEdit</zorder>
    <zorder>listWidget</zorder>
-   <zorder>pushButton_9</zorder>
-   <zorder>pushButton_10</zorder>
-   <zorder>pushButton_11</zorder>
-   <zorder>pushButton_12</zorder>
-   <zorder>pushButton_13</zorder>
-   <zorder>pushButton_14</zorder>
-   <zorder>btn_close_</zorder>
-   <zorder>pushButton_16</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1177</width>
+     <width>1103</width>
      <height>23</height>
     </rect>
    </property>

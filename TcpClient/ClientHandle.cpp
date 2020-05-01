@@ -173,6 +173,7 @@ void ClientHandle::onReadyReadSlot() {
         } else {
           QMessageBox::critical(this,"房间","未知错误");
         }
+        break;
       case Protocol::RoomList:
         if(p["result"].toString() == "RoomListTrue") {
           /*直播间列表--显示在房间左边的那个链表里面*/
@@ -183,7 +184,7 @@ void ClientHandle::onReadyReadSlot() {
         }else{
           QMessageBox::critical(this, "直播间列表", "未知错误");
         }
-      break;
+        break;
       case Protocol::CloseRoom:
         if(p["result"].toString() == "CloseHostRoomTrue") {
           host_ui_->close();
@@ -305,6 +306,12 @@ void ClientHandle::onHostRoomCreate() {
   QString name = ui_->lineName->text();
   QString pswd = ui_->linePwd->text();
   QString room_name = room_ui_->GetHostRoomNameText();
+
+  if(room_name == nullptr)
+  {
+      QMessageBox::critical(this, "创建房间", "房间名为空");
+      return;
+  }
 
   Protocol p(Protocol::CreateRoom);
   p["user_name"] = name;

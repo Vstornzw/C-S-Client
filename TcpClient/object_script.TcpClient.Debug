@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\ClientHandle.o
+./debug\RoomListUi.o
+./debug\WindowManage.o
+./debug\HostRoomUi.o
+./debug\VideoSuface.o
+./debug\moc_ClientHandle.o
+./debug\moc_RoomListUi.o
+./debug\moc_HostRoomUi.o
+./debug\moc_VideoSuface.o
+);

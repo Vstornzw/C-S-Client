@@ -31,8 +31,6 @@ class Ui_HostRoomUi
 {
 public:
     QWidget *centralwidget;
-    QLineEdit *le_chatsend;
-    QPushButton *pushButton;
     QLabel *lab_view;
     QLabel *lab_barrage;
     QTextEdit *textEdit;
@@ -71,16 +69,20 @@ public:
     QGridLayout *gridLayout_5;
     QLabel *label_10;
     QPushButton *pushButton_8;
-    QWidget *widget;
+    QWidget *layoutWidget5;
     QGridLayout *gridLayout_6;
-    QPushButton *pushButton_9;
-    QPushButton *pushButton_10;
-    QPushButton *pushButton_11;
-    QPushButton *pushButton_12;
-    QPushButton *pushButton_13;
-    QPushButton *pushButton_14;
-    QPushButton *pushButton_16;
+    QPushButton *btn_view_open_;
+    QPushButton *btn_vioce_open_;
+    QPushButton *btn_view_close_;
+    QPushButton *btn_vioce_close_;
+    QPushButton *btn_barrage_on_;
+    QPushButton *btn_exceptional_;
     QPushButton *btn_close_;
+    QPushButton *btn_barrage_off_;
+    QWidget *layoutWidget6;
+    QGridLayout *gridLayout_7;
+    QLineEdit *le_chatsend;
+    QPushButton *pushButton;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -88,15 +90,9 @@ public:
     {
         if (HostRoomUi->objectName().isEmpty())
             HostRoomUi->setObjectName(QStringLiteral("HostRoomUi"));
-        HostRoomUi->resize(1177, 914);
+        HostRoomUi->resize(1103, 621);
         centralwidget = new QWidget(HostRoomUi);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
-        le_chatsend = new QLineEdit(centralwidget);
-        le_chatsend->setObjectName(QStringLiteral("le_chatsend"));
-        le_chatsend->setGeometry(QRect(50, 520, 491, 31));
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(550, 520, 75, 31));
         lab_view = new QLabel(centralwidget);
         lab_view->setObjectName(QStringLiteral("lab_view"));
         lab_view->setGeometry(QRect(60, 60, 701, 361));
@@ -169,7 +165,7 @@ public:
 
         layoutWidget1 = new QWidget(centralwidget);
         layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(50, 490, 575, 22));
+        layoutWidget1->setGeometry(QRect(60, 480, 691, 22));
         gridLayout_2 = new QGridLayout(layoutWidget1);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
@@ -205,7 +201,7 @@ public:
 
         layoutWidget2 = new QWidget(centralwidget);
         layoutWidget2->setObjectName(QStringLiteral("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(51, 451, 571, 25));
+        layoutWidget2->setGeometry(QRect(60, 440, 691, 25));
         gridLayout_3 = new QGridLayout(layoutWidget2);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         gridLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -271,51 +267,67 @@ public:
 
         gridLayout_5->addWidget(pushButton_8, 0, 1, 1, 1);
 
-        widget = new QWidget(centralwidget);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(780, 440, 158, 112));
-        gridLayout_6 = new QGridLayout(widget);
+        layoutWidget5 = new QWidget(centralwidget);
+        layoutWidget5->setObjectName(QStringLiteral("layoutWidget5"));
+        layoutWidget5->setGeometry(QRect(790, 440, 291, 131));
+        gridLayout_6 = new QGridLayout(layoutWidget5);
         gridLayout_6->setObjectName(QStringLiteral("gridLayout_6"));
         gridLayout_6->setContentsMargins(0, 0, 0, 0);
-        pushButton_9 = new QPushButton(widget);
-        pushButton_9->setObjectName(QStringLiteral("pushButton_9"));
+        btn_view_open_ = new QPushButton(layoutWidget5);
+        btn_view_open_->setObjectName(QStringLiteral("btn_view_open_"));
 
-        gridLayout_6->addWidget(pushButton_9, 0, 0, 1, 1);
+        gridLayout_6->addWidget(btn_view_open_, 0, 0, 1, 1);
 
-        pushButton_10 = new QPushButton(widget);
-        pushButton_10->setObjectName(QStringLiteral("pushButton_10"));
+        btn_vioce_open_ = new QPushButton(layoutWidget5);
+        btn_vioce_open_->setObjectName(QStringLiteral("btn_vioce_open_"));
 
-        gridLayout_6->addWidget(pushButton_10, 0, 1, 1, 1);
+        gridLayout_6->addWidget(btn_vioce_open_, 0, 1, 1, 1);
 
-        pushButton_11 = new QPushButton(widget);
-        pushButton_11->setObjectName(QStringLiteral("pushButton_11"));
+        btn_view_close_ = new QPushButton(layoutWidget5);
+        btn_view_close_->setObjectName(QStringLiteral("btn_view_close_"));
 
-        gridLayout_6->addWidget(pushButton_11, 1, 0, 1, 1);
+        gridLayout_6->addWidget(btn_view_close_, 1, 0, 1, 1);
 
-        pushButton_12 = new QPushButton(widget);
-        pushButton_12->setObjectName(QStringLiteral("pushButton_12"));
+        btn_vioce_close_ = new QPushButton(layoutWidget5);
+        btn_vioce_close_->setObjectName(QStringLiteral("btn_vioce_close_"));
 
-        gridLayout_6->addWidget(pushButton_12, 1, 1, 1, 1);
+        gridLayout_6->addWidget(btn_vioce_close_, 1, 1, 1, 1);
 
-        pushButton_13 = new QPushButton(widget);
-        pushButton_13->setObjectName(QStringLiteral("pushButton_13"));
+        btn_barrage_on_ = new QPushButton(layoutWidget5);
+        btn_barrage_on_->setObjectName(QStringLiteral("btn_barrage_on_"));
 
-        gridLayout_6->addWidget(pushButton_13, 2, 0, 1, 1);
+        gridLayout_6->addWidget(btn_barrage_on_, 2, 0, 1, 1);
 
-        pushButton_14 = new QPushButton(widget);
-        pushButton_14->setObjectName(QStringLiteral("pushButton_14"));
+        btn_exceptional_ = new QPushButton(layoutWidget5);
+        btn_exceptional_->setObjectName(QStringLiteral("btn_exceptional_"));
 
-        gridLayout_6->addWidget(pushButton_14, 2, 1, 1, 1);
+        gridLayout_6->addWidget(btn_exceptional_, 2, 1, 1, 1);
 
-        pushButton_16 = new QPushButton(widget);
-        pushButton_16->setObjectName(QStringLiteral("pushButton_16"));
-
-        gridLayout_6->addWidget(pushButton_16, 3, 0, 1, 1);
-
-        btn_close_ = new QPushButton(widget);
+        btn_close_ = new QPushButton(layoutWidget5);
         btn_close_->setObjectName(QStringLiteral("btn_close_"));
 
         gridLayout_6->addWidget(btn_close_, 3, 1, 1, 1);
+
+        btn_barrage_off_ = new QPushButton(layoutWidget5);
+        btn_barrage_off_->setObjectName(QStringLiteral("btn_barrage_off_"));
+
+        gridLayout_6->addWidget(btn_barrage_off_, 3, 0, 1, 1);
+
+        layoutWidget6 = new QWidget(centralwidget);
+        layoutWidget6->setObjectName(QStringLiteral("layoutWidget6"));
+        layoutWidget6->setGeometry(QRect(60, 510, 691, 61));
+        gridLayout_7 = new QGridLayout(layoutWidget6);
+        gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
+        gridLayout_7->setContentsMargins(0, 0, 0, 0);
+        le_chatsend = new QLineEdit(layoutWidget6);
+        le_chatsend->setObjectName(QStringLiteral("le_chatsend"));
+
+        gridLayout_7->addWidget(le_chatsend, 0, 0, 1, 1);
+
+        pushButton = new QPushButton(layoutWidget6);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        gridLayout_7->addWidget(pushButton, 0, 1, 1, 1);
 
         HostRoomUi->setCentralWidget(centralwidget);
         layoutWidget->raise();
@@ -323,23 +335,15 @@ public:
         layoutWidget->raise();
         layoutWidget->raise();
         layoutWidget->raise();
+        layoutWidget->raise();
+        layoutWidget->raise();
         lab_barrage->raise();
-        le_chatsend->raise();
-        pushButton->raise();
         lab_view->raise();
         textEdit->raise();
         listWidget->raise();
-        pushButton_9->raise();
-        pushButton_10->raise();
-        pushButton_11->raise();
-        pushButton_12->raise();
-        pushButton_13->raise();
-        pushButton_14->raise();
-        btn_close_->raise();
-        pushButton_16->raise();
         menubar = new QMenuBar(HostRoomUi);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1177, 23));
+        menubar->setGeometry(QRect(0, 0, 1103, 23));
         HostRoomUi->setMenuBar(menubar);
         statusbar = new QStatusBar(HostRoomUi);
         statusbar->setObjectName(QStringLiteral("statusbar"));
@@ -353,7 +357,6 @@ public:
     void retranslateUi(QMainWindow *HostRoomUi)
     {
         HostRoomUi->setWindowTitle(QApplication::translate("HostRoomUi", "MainWindow", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("HostRoomUi", "\345\217\221\351\200\201", Q_NULLPTR));
         lab_view->setText(QApplication::translate("HostRoomUi", "\345\274\271\n"
 "\n"
 "\345\271\225\n"
@@ -386,14 +389,15 @@ public:
         pushButton_7->setText(QApplication::translate("HostRoomUi", "\350\201\212\345\244\251\345\210\267\346\226\260", Q_NULLPTR));
         label_10->setText(QApplication::translate("HostRoomUi", "\347\276\244\346\210\220\345\221\230\345\210\227\350\241\250", Q_NULLPTR));
         pushButton_8->setText(QApplication::translate("HostRoomUi", "\346\210\220\345\221\230", Q_NULLPTR));
-        pushButton_9->setText(QApplication::translate("HostRoomUi", "PushButton", Q_NULLPTR));
-        pushButton_10->setText(QApplication::translate("HostRoomUi", "PushButton", Q_NULLPTR));
-        pushButton_11->setText(QApplication::translate("HostRoomUi", "PushButton", Q_NULLPTR));
-        pushButton_12->setText(QApplication::translate("HostRoomUi", "PushButton", Q_NULLPTR));
-        pushButton_13->setText(QApplication::translate("HostRoomUi", "PushButton", Q_NULLPTR));
-        pushButton_14->setText(QApplication::translate("HostRoomUi", "PushButton", Q_NULLPTR));
-        pushButton_16->setText(QApplication::translate("HostRoomUi", "PushButton", Q_NULLPTR));
+        btn_view_open_->setText(QApplication::translate("HostRoomUi", "\345\274\200\345\220\257\346\221\204\345\203\217\345\244\264", Q_NULLPTR));
+        btn_vioce_open_->setText(QApplication::translate("HostRoomUi", "\346\211\223\345\274\200\351\272\246\345\205\213\351\243\216", Q_NULLPTR));
+        btn_view_close_->setText(QApplication::translate("HostRoomUi", "\345\205\263\351\227\255\346\221\204\345\203\217\345\244\264", Q_NULLPTR));
+        btn_vioce_close_->setText(QApplication::translate("HostRoomUi", "\345\205\263\351\227\255\351\272\246\345\205\213\351\243\216", Q_NULLPTR));
+        btn_barrage_on_->setText(QApplication::translate("HostRoomUi", "\346\211\223\345\274\200\345\274\271\345\271\225", Q_NULLPTR));
+        btn_exceptional_->setText(QApplication::translate("HostRoomUi", "\344\270\200\351\224\256\346\211\223\350\265\217", Q_NULLPTR));
         btn_close_->setText(QApplication::translate("HostRoomUi", "\351\200\200\345\207\272\347\233\264\346\222\255", Q_NULLPTR));
+        btn_barrage_off_->setText(QApplication::translate("HostRoomUi", "\345\205\263\351\227\255\345\274\271\345\271\225", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("HostRoomUi", "\345\217\221\351\200\201", Q_NULLPTR));
     } // retranslateUi
 
 };
