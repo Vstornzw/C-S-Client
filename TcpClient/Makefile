@@ -222,6 +222,8 @@ Makefile: TcpClient.pro ../../../../QQT/5.8/mingw53_32/mkspecs/win32-g++/qmake.c
 		../../../../QQT/5.8/mingw53_32/mkspecs/features/lex.prf \
 		TcpClient.pro \
 		../../../../QQT/5.8/mingw53_32/lib/qtmaind.prl \
+		../../../../QQT/5.8/mingw53_32/lib/Qt5MultimediaWidgets.prl \
+		../../../../QQT/5.8/mingw53_32/lib/Qt5Multimedia.prl \
 		../../../../QQT/5.8/mingw53_32/lib/Qt5Widgets.prl \
 		../../../../QQT/5.8/mingw53_32/lib/Qt5Gui.prl \
 		../../../../QQT/5.8/mingw53_32/lib/Qt5Network.prl \
@@ -390,6 +392,8 @@ Makefile: TcpClient.pro ../../../../QQT/5.8/mingw53_32/mkspecs/win32-g++/qmake.c
 ../../../../QQT/5.8/mingw53_32/mkspecs/features/lex.prf:
 TcpClient.pro:
 ../../../../QQT/5.8/mingw53_32/lib/qtmaind.prl:
+../../../../QQT/5.8/mingw53_32/lib/Qt5MultimediaWidgets.prl:
+../../../../QQT/5.8/mingw53_32/lib/Qt5Multimedia.prl:
 ../../../../QQT/5.8/mingw53_32/lib/Qt5Widgets.prl:
 ../../../../QQT/5.8/mingw53_32/lib/Qt5Gui.prl:
 ../../../../QQT/5.8/mingw53_32/lib/Qt5Network.prl:

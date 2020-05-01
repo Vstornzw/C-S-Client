@@ -6,6 +6,15 @@
 #include <QHostAddress>
 #include "protocol.h"
 
+//在TcpClient.pro文件里面要添加代码
+#include <QCamera>
+#include <QUdpSocket>
+#include "VideoSuface.h"
+#include <QBuffer>
+#include <QHostAddress>
+#include <QImageReader>
+
+
 namespace Ui {
 class HostRoomUi;
 }
@@ -34,11 +43,20 @@ class HostRoomUi : public QMainWindow {
   //HostRoomUi.ui界面上"群成员列表"展现问题
   void UserListPlay(Protocol p);
 
+  //UDP视频协议
+  void UdpCamera();
+
  signals:
   void sigCloseHostRoom(QString str);
 
  private slots:
   void onCloseHostRoom();
+
+  //开启摄像头
+  void onViewOpen();
+  void onFrameChange(QVideoFrame  frame);
+  void onReadyReadSlot();
+  void onViewClose();
 
 
  private:
@@ -49,6 +67,12 @@ class HostRoomUi : public QMainWindow {
   int camera_Port;
   /*音频端口*/
   int audio_Port;
+
+  QCamera *camera_;
+  QUdpSocket *write_socket_;
+  QUdpSocket *read_socket_;
+  VideoSuface *video_suface_;
+
 };
 
 #endif // HOSTROOMUI_H

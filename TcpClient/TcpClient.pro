@@ -7,6 +7,12 @@
 QT       += core gui
 QT       += network
 
+CONFIG   += mobility
+MOBILITY += multimedia
+QT       += multimedia
+QT       += multimediawidgets
+
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = TcpClient
@@ -28,13 +34,15 @@ SOURCES += main.cpp\
         ClientHandle.cpp \
     RoomListUi.cpp \
     WindowManage.cpp \
-    HostRoomUi.cpp
+    HostRoomUi.cpp \
+    VideoSuface.cpp
 
 HEADERS  += ClientHandle.h \
     protocol.h \
     RoomListUi.h \
     WindowManage.h \
-    HostRoomUi.h
+    HostRoomUi.h \
+    VideoSuface.h
 
 FORMS    += ClientHandle.ui \
     RoomListUi.ui \

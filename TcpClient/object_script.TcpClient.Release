@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\ClientHandle.o
+./release\RoomListUi.o
+./release\WindowManage.o
+./release\HostRoomUi.o
+./release\VideoSuface.o
+./release\moc_ClientHandle.o
+./release\moc_RoomListUi.o
+./release\moc_HostRoomUi.o
+./release\moc_VideoSuface.o
+);
