@@ -14,11 +14,21 @@
 #include <QHostAddress>
 #include <QImageReader>
 
+#include <QAudioDeviceInfo>
+#include <QAudioInput>
+#include <QAudioOutput>
+//#include <QMultimedia>
 
 namespace Ui {
 class HostRoomUi;
 }
 
+
+struct AudioPackage {
+
+  char data[1024];
+  int data_len;
+};
 
 class HostRoomUi : public QMainWindow {
     Q_OBJECT
@@ -46,6 +56,9 @@ class HostRoomUi : public QMainWindow {
   //UDP视频协议
   void UdpCamera();
 
+  //UDP音频协议
+  void UdpAudio();
+
  signals:
   void sigCloseHostRoom(QString str);
 
@@ -58,6 +71,11 @@ class HostRoomUi : public QMainWindow {
   void onReadyReadSlot();
   void onViewClose();
 
+  //开启音频
+  void onAudioOpen();
+  void onCaptureDataFromDevice();
+  void onReadyReadAudio();
+  void onAudioClose();
 
  private:
   Ui::HostRoomUi *ui_;
@@ -69,9 +87,18 @@ class HostRoomUi : public QMainWindow {
   int audio_Port;
 
   QCamera *camera_;
+  VideoSuface *video_suface_;
+
   QUdpSocket *write_socket_;
   QUdpSocket *read_socket_;
-  VideoSuface *video_suface_;
+
+  QUdpSocket *write_socket_audio_;
+  QUdpSocket *read_socket_audio_;
+
+  QAudioInput *audio_input_;
+  QAudioOutput *audio_output_;
+  QIODevice *audio_input_in_device_;
+  QIODevice *audio_output_in_device_;
 
 };
 

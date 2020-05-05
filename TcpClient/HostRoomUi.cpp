@@ -9,14 +9,21 @@ HostRoomUi::HostRoomUi(QWidget *parent) :
 {
     ui_->setupUi(this);
 
-    write_socket_ = new QUdpSocket(this);//主播摄像头
-    read_socket_  = new QUdpSocket(this);//观众摄像头
-    UdpCamera();                         //UDP视频协议
+    write_socket_ = new QUdpSocket(this);       //主播摄像头
+    read_socket_  = new QUdpSocket(this);       //观众摄像头
+    UdpCamera();                                //UDP视频协议
+
+    write_socket_audio_ = new QUdpSocket(this); //主播音频
+    read_socket_audio_ = new QUdpSocket(this);  //观众音频
+    UdpAudio();                                 //UDP音频协议
 
     connect(ui_->btn_close_,SIGNAL(clicked(bool)),this,SLOT(onCloseHostRoom()));
 
     connect(ui_->btn_view_open_,SIGNAL(clicked(bool)),this,SLOT(onViewOpen()));
     connect(ui_->btn_view_close_,SIGNAL(clicked(bool)),this,SLOT(onViewClose()));
+
+    connect(ui_->btn_vioce_open_,SIGNAL(clicked(bool)),this,SLOT(onAudioOpen()));
+    connect(ui_->btn_vioce_close_,SIGNAL(clicked(bool)),this,SLOT(onAudioClose()));
 }
 
 HostRoomUi::~HostRoomUi()
@@ -119,23 +126,10 @@ void HostRoomUi::UserListPlay(Protocol p) {
 
 }
 
-//=================开启摄像头按钮=================//
-void HostRoomUi::onViewOpen() {
-  if(ui_->le_HostName->text() == nullptr) {//主播直播间不显示主播名
-    camera_->start();
-  } else {
-    //绑定本地端口
-    read_socket_->bind(QHostAddress::AnyIPv4,
-                       camera_Port,
-                       QUdpSocket::ShareAddress|
-                       QUdpSocket::ReuseAddressHint);
-    read_socket_->joinMulticastGroup(groupAddress);//join multicast Group加入多播组
-  }
 
-}
 
 void HostRoomUi::UdpCamera() {
-  //摄像头代码
+  //摄像头代码 default Camera 获取默认
   QCameraInfo info = QCameraInfo::defaultCamera();
   camera_ = new QCamera(info,this);
   video_suface_ = new VideoSuface(this);
@@ -190,7 +184,24 @@ void HostRoomUi::onFrameChange(QVideoFrame  frame) {
   //将图片信息写入到制定端口,数据太大会导致发送失败返回-1，具体可参考帮助文档QUdpSocket::writeDatagram
   //注意writeDatagram的地址和端口要和接收端相同（端口不宜过小，以免和其他冲突
 
-  write_socket_->writeDatagram(byte,groupAddress,camera_Port);//----------------------------------------------------------------------=
+  write_socket_->writeDatagram(byte,groupAddress,camera_Port);//------------下一步当开启摄像头后
+                                                              //执行UdpCamera()的 connect(this->read_socket_,SIGNAL(readyRead()),this,SLOT(onReadyReadSlot()));
+                                                              //链接到onReadyReadSlot()函数
+}
+
+//=================开启摄像头按钮=================//
+void HostRoomUi::onViewOpen() {
+  if(ui_->le_HostName->text() == nullptr) {//主播直播间不显示主播名
+    camera_->start();
+  } else {
+    //绑定本地端口
+    read_socket_->bind(QHostAddress::AnyIPv4,
+                       camera_Port,
+                       QUdpSocket::ShareAddress|
+                       QUdpSocket::ReuseAddressHint);
+    read_socket_->joinMulticastGroup(groupAddress);//join multicast Group加入多播组
+  }
+
 }
 
 void HostRoomUi::onReadyReadSlot() {
@@ -238,8 +249,90 @@ void HostRoomUi::onViewClose() {
   }
 }
 
+//函数功能：udp音频传输协议
+void HostRoomUi::UdpAudio() {
+
+  //设置音频文件格式；
+  QAudioFormat format;
+  //设置采样频率
+  format.setSampleRate(8000);
+  //设置通道数
+  format.setChannelCount(1);
+  //设置每次采样得到的样本数据位值
+  format.setSampleSize(8);
+  //设置编码方法
+  format.setCodec("audio/pcm");
+  //设置采样字节存储顺序
+  format.setByteOrder(QAudioFormat::LittleEndian);
+  //设置采样类型
+  format.setSampleType(QAudioFormat::UnSignedInt);
+  //按照上述的声音输入输出设备和声音的参数信息创建QAudioInput和QAudioOutput对象
+  this->audio_input_ = new QAudioInput(format);
+  this->audio_output_ = new QAudioOutput(format);
+
+  //默认情况下，扬声器处于启动状态
+  audio_output_in_device_ = audio_output_->start();
+
+
+}
 
 
 
 
 
+//开启音频
+void HostRoomUi::onAudioOpen() {
+
+  if(ui_->le_HostName->text() == nullptr) {
+    audio_input_in_device_ = audio_input_->start();
+    /*
+     在captureDataFromDevice()槽函数中调用
+     audioInputIODevice的read函数得到原始的音频数据。
+    */
+    connect(audio_input_in_device_,SIGNAL(readyRead()),this,SLOT(onCaptureDataFromDevice()));
+  } else {
+    //游客窗口被禁言
+    audio_input_->stop();
+    write_socket_audio_->setSocketOption(QAbstractSocket::MulticastTtlOption,1);//设置套接字
+    //绑定本地端口
+    read_socket_audio_->bind(QHostAddress::AnyIPv4, audio_Port,QUdpSocket::ReuseAddressHint|
+                                                         QUdpSocket::ShareAddress);//绑定广播地址端口
+    read_socket_audio_->joinMulticastGroup(groupAddress);//添加到组播，绑定到读套接字上
+    connect(read_socket_audio_,SIGNAL(readyRead()),this,SLOT(onReadyReadAudio()));
+  }
+}
+
+//===========得到原始的音频数据===========//
+void HostRoomUi::onCaptureDataFromDevice() {
+ //创建一个结构体
+ AudioPackage pack;
+ memset(&pack,0,sizeof(AudioPackage));
+ pack.data_len = audio_input_in_device_->read(pack.data, 1024);
+ //qint64 writeDatagram(const char *data, qint64 len, const QHostAddress &host, quint16 port);
+ write_socket_audio_->writeDatagram((char*)&pack, sizeof(AudioPackage),groupAddress, 1001);
+ /*
+  把得到的原始音频数据写入缓存，然后调用audioOutputDevice()的
+    write函数把缓存的数据写入声音输出设备即可听到声音。
+ */
+ audio_output_in_device_->write(pack.data,pack.data_len);
+}
+
+//===原始音频数据采用的G.711编码方式进行的，就可以获得压缩后的音频数据，即可以进行网络传输
+void HostRoomUi::onReadyReadAudio() {
+  AudioPackage pack;
+  memset(&pack,0,sizeof(AudioPackage));
+  read_socket_audio_->readDatagram((char*)&pack,sizeof(AudioPackage));
+  audio_output_in_device_->write(pack.data,pack.data_len);
+}
+
+void HostRoomUi::onAudioClose() {
+  if(ui_->le_HostName->text() == nullptr) {
+    audio_input_->stop();
+  } else {
+    audio_output_->stop();
+    read_socket_audio_->leaveMulticastGroup(groupAddress);
+    //终止当前连接并重置套接字
+    read_socket_->abort();
+  }
+
+}
